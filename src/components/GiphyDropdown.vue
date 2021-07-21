@@ -24,7 +24,7 @@
                 :style="{'backgroundImage': `url('${option.images.original.url}')`}"
                 v-for="(option, key) in options"
                 :key="key"
-                @click="toCurrentUrl(option.url)"
+                @click="copyToClipboard(option.url)"
             />
           </template>
           <template v-else>
@@ -66,8 +66,8 @@ export default {
     }
   },
   methods: {
-    toCurrentUrl(url) {
-      window.open(url, '_blank');
+    copyToClipboard(url) {
+      navigator.clipboard.writeText(url)
     }
   }
 }
