@@ -6,11 +6,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    items: []
+    items: [],
+    notifications: {
+      type: '',
+      title: '',
+      isOpen: false,
+    },
   },
   mutations: {
     setSearchResult(state, payload) {
       state.items = payload;
+    },
+    setNotification(state, payload) {
+      state.notifications.type = payload.type;
+      state.notifications.title = payload.title;
+      state.notifications.isOpen = true;
+      setTimeout(() => {
+        state.notifications.isOpen = false;
+      }, 3000);
     }
   },
   actions: {
@@ -26,6 +39,7 @@ export default new Vuex.Store({
   },
   getters: {
     getGiphyItem: (state) => state.items,
+    getNotificationOptions: (state) => state.notifications,
   },
   modules: {
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="giphySearch">
+  <div  class="giphySearch">
     <input
         class="giphySearch__inner"
         v-bind="$attrs"
@@ -33,8 +33,6 @@
             </div>
           </template>
         </div>
-
-
       </div>
     </transition>
   </div>
@@ -43,8 +41,8 @@
 
 <script>
 import PreLoader from "../components/Loader";
+import { mapMutations } from "vuex"
 export default {
-  // endpoint: https://api.giphy.com/v1/gifs/search?q=<SEARCH TERM>&api_key=WxdyYLhMuub9clDtbglE0bJkSBExzePj
   name: "GiphyDropdown",
   components: {
     PreLoader,
@@ -66,9 +64,17 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      notification: "setNotification"
+    }),
     copyToClipboard(url) {
       navigator.clipboard.writeText(url)
-    }
+      this.notification({
+        title: 'URL картинки копироваться в буфер обмена',
+        type: "success",
+      })
+      this.$emit('closeDropMenu')
+    },
   }
 }
 </script>

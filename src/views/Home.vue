@@ -5,17 +5,22 @@
         @input="onInputQuerySearch"
         :options="giphyOptions"
         :is-loading="loading"
+        @closeDropMenu="giphySearch = '' "
     />
+
+    <Notification v-bind="notification"/>
   </div>
 </template>
 
 <script>
 import GiphyDropdown from "../components/GiphyDropdown.vue";
+import Notification from "../components/Notification";
 import { mapActions, mapGetters } from "vuex"
 export default {
   name: 'Home',
   components: {
     GiphyDropdown,
+    Notification,
   },
   data() {
     return {
@@ -26,7 +31,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      giphyOptions : "getGiphyItem"
+      giphyOptions: "getGiphyItem",
+      notification: "getNotificationOptions"
     }),
   },
   methods: {
