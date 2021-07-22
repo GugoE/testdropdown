@@ -70,7 +70,7 @@ export default {
     copyToClipboard(url) {
       navigator.clipboard.writeText(url)
       this.notification({
-        title: 'URL картинки копироваться в буфер обмена',
+        title: 'URL картинки копировано в буфер обмена',
         type: "success",
       })
       this.$emit('closeDropMenu')
